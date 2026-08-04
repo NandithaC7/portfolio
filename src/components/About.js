@@ -1,6 +1,6 @@
 import React from 'react';
-import cirss from '/Users/nanducc/Desktop/portnandu/src/assets/cirss.jpg';
-import amrita from '/Users/nanducc/Desktop/portnandu/src/assets/amrit.svg';
+import cirss from '../assets/cirss.jpg';
+import amrita from '../assets/amrit.svg';
 import './About.css';
 
 function About() {

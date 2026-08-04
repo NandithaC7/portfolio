@@ -1,11 +1,11 @@
 import React from 'react';
 import './Projects.css'; // Make sure this import is at the top
 
-import redImg from '/Users/nanducc/Desktop/portnandu/src/assets/red.jpg';
-import greenImg from '/Users/nanducc/Desktop/portnandu/src/assets/green.png';
-import blueImg from '/Users/nanducc/Desktop/portnandu/src/assets/blue.png';
-import orangeImg from '/Users/nanducc/Desktop/portnandu/src/assets/orange.png';
-import grayImg from '/Users/nanducc/Desktop/portnandu/src/assets/gray.png';
+import redImg from '../assets/red.jpg';
+import greenImg from '../assets/green.png';
+import blueImg from '../assets/blue.png';
+import orangeImg from '../assets/orange.png';
+import grayImg from '../assets/gray.png';
 
 function Projects() {
   return (

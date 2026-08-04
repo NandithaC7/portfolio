@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import myPic from '/Users/nanducc/Desktop/portnandu/src/assets/mypic.jpeg'; 
+import myPic from '../assets/mypic.jpeg'; 
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 function Home() {
