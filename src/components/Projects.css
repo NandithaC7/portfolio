@@ -1,86 +1,79 @@
 .projects-section {
-  padding: 5rem 2rem;
-  background-color: #1e1e1e;
-  color: #fff;
-  text-align: center;
+  text-align: left;
 }
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.6rem;
 }
 
 .project-card {
-  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project-card:hover {
-  transform: scale(1.05);
+.project-image-wrap {
+  height: 180px;
+  overflow: hidden;
 }
 
 .project-image {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s ease;
-}
-
-.project-card:hover .project-image {
-  transform: scale(1.1);
-}
-
-.project-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
   height: 100%;
-  width: 100%;
-  background: rgba(26, 26, 26, 0.8);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-.project-card:hover .project-overlay {
-  opacity: 1;
+.project-body {
+  padding: 1.5rem;
+}
+
+.project-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
 }
 
 .project-title {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #ff69b4;
-  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.project-arrow {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .project-desc {
-  font-size: 0.95rem;
-  padding: 0 1rem;
-  color: #ddd;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 0.96rem;
 }
 
-.section-title {
-  color: #ff69b4;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease-in-out;
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
 }
 
-.section-title:hover {
-  text-shadow: 0 0 10px #ff69b4;
-  letter-spacing: 1px;
+.project-card:hover .project-image {
+  transform: scale(1.08);
 }
 
-.about-section, .projects-section, .contact {
-  padding-top: 100px; /* So content isn't hidden behind navbar */
+.project-card:hover .project-arrow {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: rotate(-45deg);
 }

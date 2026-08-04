@@ -1,95 +1,102 @@
 .about-section {
-  padding: 5rem 2rem;
-  color: white;
-  background-color: #121212;
   text-align: left;
 }
 
-.section-title {
-  color: #ff69b4;
-  font-size: 2.2rem;
-  margin-bottom: 2rem;
-  transition: 0.3s;
-}
-
-.section-title:hover {
-  text-shadow: 0 0 8px #ff69b4;
-  letter-spacing: 1px;
-}
-
-.section-subtitle,
-.school-subtitle {
-  color: #ffc0cb;
-  font-size: 1.8rem;
-  margin: 3rem 0 1.5rem;
-}
-
 .about-para {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   line-height: 1.9;
-  max-width: 800px;
+  color: var(--text-muted);
+  max-width: 880px;
   margin-bottom: 3rem;
 }
 
-.edu-box {
-  display: flex;
-  align-items: flex-start;
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-  background-color: transparent;
-  border: 1.5px solid #ff69b4;
-  border-radius: 10px;
-  padding: 1.2rem;
-  margin-bottom: 2rem;
-  max-width: 850px;
+  margin-bottom: 3.5rem;
+}
+
+.about-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-strong);
+  background: var(--card-hover);
+}
+
+.about-card-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.about-card-title::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--accent);
+  margin-right: 0.6rem;
+}
+
+.about-card p {
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+
+.about-section-heading {
+  font-size: 1.5rem;
+  margin-bottom: 1.6rem;
+}
+
+.edu-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: relative;
+}
+
+.edu-entry {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.edu-entry:hover {
+  transform: translateX(6px);
+  border-color: var(--accent);
 }
 
 .edu-logo {
-  width: 50px;
-  height: 50px;
+  width: 54px;
+  height: 54px;
   object-fit: contain;
-  background-color: white;
-  border-radius: 6px;
-  padding: 4px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 6px;
+  flex-shrink: 0;
 }
 
-.edu-text h4 {
-  margin-bottom: 0.3rem;
-  font-size: 1.1rem;
-  color: white;
+.edu-entry h4 {
+  font-size: 1.08rem;
+  margin-bottom: 0.35rem;
 }
 
-.edu-text p {
-  margin: 0.2rem 0;
-  color: #ccc;
+.edu-entry p {
+  color: var(--text-muted);
   font-size: 0.95rem;
-}
-
-.about-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.about-section > * {
-  width: 100%;
-  max-width: 900px;
-}
-
-.about-section, .projects-section, .contact {
-  padding-top: 100px; /* So content isn't hidden behind navbar */
-}
-
-.info-box {
-  border: 1.5px solid #ff69b4;
-  border-radius: 10px;
-  padding: 1rem 1.5rem;
-  margin-bottom: 2rem;
-  background-color: #1e1e1e;
-  max-width: 800px;
-}
-
-.info-box p {
-  margin: 0.5rem 0;
-  font-size: 1rem;
-  color: #f5f5f5;
+  line-height: 1.5;
 }
