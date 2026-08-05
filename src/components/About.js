@@ -18,12 +18,6 @@ function About() {
 
       <div className="about-cards">
         <div className="about-card">
-          <h3 className="about-card-title">Certifications</h3>
-          <p>✅ Udemy Course on Full-Stack Development</p>
-          <p>✅ Coursera Course on Machine Learning</p>
-        </div>
-
-        <div className="about-card">
           <h3 className="about-card-title">Internships</h3>
           <p>☀️ Summer Internship 2026 – Software Development Intern</p>
         </div>
