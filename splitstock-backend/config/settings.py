@@ -187,9 +187,33 @@ TWILIO_WHATSAPP_FROM = os.getenv("TWILIO_WHATSAPP_FROM", "whatsapp:+14155238886"
 PREDICTION_WINDOW_DAYS = int(os.getenv("PREDICTION_WINDOW_DAYS", "14"))
 FRONTEND_BASE_URL = os.getenv("FRONTEND_BASE_URL", "http://localhost:5173")
 
+# --- Production hardening -------------------------------------------------
+# Only applied off DEBUG, so local development stays plain HTTP.
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SECURE_SSL_REDIRECT = env_bool("DJANGO_SECURE_SSL_REDIRECT", True)
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = "DENY"
+
+    if SECRET_KEY == "dev-only-insecure-key-change-me":
+        raise RuntimeError(
+            "DJANGO_SECRET_KEY must be set to a real secret when DEBUG is off."
+        )
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "handlers": {"console": {"class": "logging.StreamHandler"}},
     "root": {"handlers": ["console"], "level": os.getenv("DJANGO_LOG_LEVEL", "INFO")},
+    # Django ships its own console handler for these; without propagate=False
+    # every request line gets printed twice.
+    "loggers": {
+        "django": {"handlers": ["console"], "level": "INFO", "propagate": False},
+        "daphne": {"handlers": ["console"], "level": "INFO", "propagate": False},
+    },
 }

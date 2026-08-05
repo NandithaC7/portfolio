@@ -12,7 +12,7 @@ const LINKS = [
   { to: "/profile", label: "Profile" },
 ];
 
-export default function AppShell({ live }) {
+export default function AppShell({ live, liveRejected = false }) {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
   const householdList = useAuthStore((state) => state.households);
@@ -62,11 +62,17 @@ export default function AppShell({ live }) {
             <span
               className="row"
               style={{ gap: 6, marginLeft: 10 }}
-              title={live ? "Live — updates arrive as they happen" : "Offline — reconnecting"}
+              title={
+                live
+                  ? "Live — updates arrive as they happen"
+                  : liveRejected
+                    ? "Live updates are off for this household — sign in again"
+                    : "Offline — reconnecting"
+              }
             >
               <span className={`live-dot ${live ? "" : "live-dot--off"}`} />
               <span className="hint" style={{ fontSize: 12 }}>
-                {live ? "live" : "offline"}
+                {live ? "live" : liveRejected ? "paused" : "offline"}
               </span>
             </span>
 

@@ -43,7 +43,7 @@ function LiveRoutes() {
   const userId = useAuthStore((state) => state.user?.id);
   const [lastEvent, setLastEvent] = useState(null);
 
-  const { connected } = useHouseholdWS(householdId, (event) => {
+  const { connected, rejected } = useHouseholdWS(householdId, (event) => {
     setLastEvent({ ...event, receivedAt: Date.now() });
 
     // Your own log already got a confirmation from the form that submitted it.
@@ -69,7 +69,7 @@ function LiveRoutes() {
 
   return (
     <Routes>
-      <Route element={<AppShell live={connected} />}>
+      <Route element={<AppShell live={connected} liveRejected={Boolean(rejected)} />}>
         <Route index element={<Dashboard lastEvent={lastEvent} />} />
         <Route path="stock/:id" element={<StockDetail lastEvent={lastEvent} />} />
         <Route path="balances" element={<BalanceSheet lastEvent={lastEvent} />} />
