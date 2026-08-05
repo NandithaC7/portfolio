@@ -1,0 +1,48 @@
+/* SplitStock design tokens.
+   These seven colours are the whole palette. Nothing else gets added here —
+   no blues, no gradients, no pure black or white. */
+
+:root {
+  --milk: #fdfcf7;
+  --paper: #f3eedd;
+  --yolk: #f0b429;
+  --yolk-dim: #f6d883;
+  --ink: #2a2318;
+  --moss: #6b7a4f;
+  --brick: #a6432c;
+
+  /* Ink at fixed opacities — hairline borders and secondary text. */
+  --ink-08: rgba(42, 35, 24, 0.08);
+  --ink-15: rgba(42, 35, 24, 0.15);
+  --ink-25: rgba(42, 35, 24, 0.25);
+  --ink-40: rgba(42, 35, 24, 0.4);
+  --ink-55: rgba(42, 35, 24, 0.55);
+  --ink-70: rgba(42, 35, 24, 0.7);
+
+  /* Yolk pressed one step darker for borders and hover — still Yolk, not orange. */
+  --yolk-edge: #d99e1d;
+  --yolk-hover: #e5aa22;
+
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Work Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+
+  --radius-card: 12px;
+  --radius-control: 8px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Motion: liquid settling, never a spring. */
+  --ease: cubic-bezier(0.32, 0.08, 0.24, 1);
+  --t-hover: 170ms;
+  --t-fill: 600ms;
+
+  --shell-max: 1120px;
+}
