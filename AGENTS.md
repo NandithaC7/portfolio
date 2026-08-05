@@ -15,6 +15,17 @@ Services / commands (all standard CRA scripts in `package.json`):
 - Lint: there is no separate lint script; ESLint (`react-app` config) runs
   automatically as part of `npm start` and `npm run build`.
 
+Git / contribution workflow (owner preference — important):
+- Do NOT run any git write commands (`commit`, `push`, branch creation) or any
+  GitHub write actions (creating/updating PRs). The repository owner performs ALL
+  git and GitHub operations themselves.
+- Only PROVIDE the exact commands for the owner to run and review; never execute
+  them. This keeps the owner as the sole commit author/contributor.
+- Never include the word "cursor" in a commit message, branch name, or PR.
+- Do not invent branch names or auto-generated suffixes. The owner creates and
+  names all branches; use whatever branch the owner specifies.
+- Always get commit messages approved by the owner before they run them.
+
 Non-obvious notes:
 - The default test `src/App.test.js` is leftover CRA boilerplate that asserts
   "learn react" text, which this custom portfolio does not render, so that single
