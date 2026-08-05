@@ -7,36 +7,26 @@
 import {
   ArrowLeft,
   Check,
-  ChevronDown,
   Copy,
   Droplet,
   LogOut,
   Milk,
   Package,
   Plus,
-  Receipt,
   RefreshCw,
   Soup,
-  Users,
   Wheat,
   X,
 } from "lucide-react";
 
+/** Interface actions. Pantry glyphs are chosen by `stockGlyph` below. */
 export const icons = {
   ArrowLeft,
   Check,
-  ChevronDown,
   Copy,
-  Droplet,
   LogOut,
-  Milk,
-  Package,
   Plus,
-  Receipt,
   RefreshCw,
-  Soup,
-  Users,
-  Wheat,
   X,
 };
 

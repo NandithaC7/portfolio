@@ -1,5 +1,4 @@
 from django.db import transaction
-from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
 from rest_framework.decorators import action, api_view, permission_classes
@@ -18,7 +17,6 @@ class HouseholdViewSet(viewsets.ModelViewSet):
         return (
             Household.objects.filter(memberships__user=self.request.user)
             .prefetch_related("memberships__user")
-            .annotate(member_count_annotated=Count("memberships", distinct=True))
             .distinct()
         )
 

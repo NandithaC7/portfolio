@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.test import TransactionTestCase, override_settings
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from households.models import Household, Membership
+from households.models import Household
 from stocks.broadcast import broadcast_stock_update
 from stocks.middleware import JWTAuthMiddlewareStack
 from stocks.models import Stock

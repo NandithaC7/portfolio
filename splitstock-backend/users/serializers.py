@@ -27,6 +27,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    # Both fields are unique on the model, so DRF attaches a UniqueValidator
+    # whose generic message ("custom user with this email already exists")
+    # would win before the field-level checks below ever run. Declaring them
+    # with an empty validator list hands the wording back to us.
+    username = serializers.CharField(validators=[])
+    email = serializers.EmailField(validators=[])
     password = serializers.CharField(write_only=True, validators=[validate_password])
     password_confirm = serializers.CharField(write_only=True)
 
@@ -41,6 +47,14 @@ class RegisterSerializer(serializers.ModelSerializer):
             "password",
             "password_confirm",
         )
+
+    def validate_username(self, value):
+        value = value.strip()
+        if User.objects.filter(username__iexact=value).exists():
+            raise serializers.ValidationError(
+                "That username is taken — pick another one."
+            )
+        return value
 
     def validate_email(self, value):
         if User.objects.filter(email__iexact=value).exists():

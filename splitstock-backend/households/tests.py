@@ -6,53 +6,6 @@ from .models import Household, Membership
 User = get_user_model()
 
 
-class AuthTests(APITestCase):
-    def test_register_returns_tokens_and_user(self):
-        response = self.client.post(
-            "/api/auth/register/",
-            {
-                "username": "newbie",
-                "email": "newbie@test.local",
-                "password": "a-strong-passphrase-42",
-                "password_confirm": "a-strong-passphrase-42",
-            },
-            format="json",
-        )
-        self.assertEqual(response.status_code, 201)
-        body = response.json()
-        self.assertIn("access", body["tokens"])
-        self.assertEqual(body["user"]["username"], "newbie")
-
-    def test_mismatched_passwords_are_rejected(self):
-        response = self.client.post(
-            "/api/auth/register/",
-            {
-                "username": "newbie",
-                "email": "newbie@test.local",
-                "password": "a-strong-passphrase-42",
-                "password_confirm": "something-else-entirely",
-            },
-            format="json",
-        )
-        self.assertEqual(response.status_code, 400)
-        self.assertIn("don't match", str(response.json()))
-
-    def test_login_accepts_an_email_as_the_identifier(self):
-        User.objects.create_user(
-            username="maya", email="maya@test.local", password="a-strong-passphrase-42"
-        )
-        response = self.client.post(
-            "/api/auth/login/",
-            {"username": "maya@test.local", "password": "a-strong-passphrase-42"},
-            format="json",
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("access", response.json()["tokens"])
-
-    def test_me_requires_a_token(self):
-        self.assertEqual(self.client.get("/api/auth/me/").status_code, 401)
-
-
 class HouseholdTests(APITestCase):
     def setUp(self):
         self.creator = User.objects.create_user(

@@ -10,7 +10,7 @@ from django.db import transaction
 from django.utils import timezone
 
 from households.models import Household, Membership
-from stocks.models import Balance, RestockSuggestion, Settlement, Stock, UsageLog
+from stocks.models import Balance, Stock, UsageLog
 from stocks.services import recalculate_balance_for_stock
 from stocks.tasks import apply_prediction
 

@@ -44,13 +44,3 @@ class HouseholdSerializer(serializers.ModelSerializer):
             (m for m in obj.memberships.all() if m.user_id == request.user.id), None
         )
         return membership.role if membership else None
-
-
-class HouseholdSummarySerializer(serializers.ModelSerializer):
-    """Lean payload for the household switcher in the frontend header."""
-
-    member_count = serializers.IntegerField(read_only=True)
-
-    class Meta:
-        model = Household
-        fields = ("id", "name", "invite_code", "member_count")
