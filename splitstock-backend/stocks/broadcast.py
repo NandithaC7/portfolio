@@ -22,7 +22,7 @@ def _send(household_id, payload):
         logger.exception("Could not broadcast to household_%s", household_id)
 
 
-def broadcast_stock_update(stock, logged_by=None, quantity_used=None):
+def broadcast_stock_update(stock, logged_by=None, logged_by_id=None, quantity_used=None):
     _send(
         stock.household_id,
         {
@@ -34,6 +34,8 @@ def broadcast_stock_update(stock, logged_by=None, quantity_used=None):
             "unit": stock.unit,
             "days_until_empty": stock.days_until_empty,
             "logged_by": logged_by,
+            # Lets a client tell its own echo apart from a flatmate's action.
+            "logged_by_id": logged_by_id,
             "quantity_used": float(quantity_used) if quantity_used is not None else None,
         },
     )

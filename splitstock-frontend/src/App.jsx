@@ -40,12 +40,16 @@ function RedirectIfAuthed({ children }) {
  */
 function LiveRoutes() {
   const householdId = useAuthStore((state) => state.currentHouseholdId);
+  const userId = useAuthStore((state) => state.user?.id);
   const [lastEvent, setLastEvent] = useState(null);
 
   const { connected } = useHouseholdWS(householdId, (event) => {
     setLastEvent({ ...event, receivedAt: Date.now() });
 
-    if (event.type === "stock_updated" && event.logged_by) {
+    // Your own log already got a confirmation from the form that submitted it.
+    const isMyOwnEcho = event.logged_by_id && event.logged_by_id === userId;
+
+    if (event.type === "stock_updated" && event.logged_by && !isMyOwnEcho) {
       toast.info(
         `${event.stock_name} · ${event.current_quantity}${event.unit || ""} left`,
         `${event.logged_by} just logged usage.`

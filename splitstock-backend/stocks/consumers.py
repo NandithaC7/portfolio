@@ -54,6 +54,7 @@ class HouseholdConsumer(AsyncWebsocketConsumer):
                     "unit": event.get("unit"),
                     "days_until_empty": event.get("days_until_empty"),
                     "logged_by": event.get("logged_by"),
+                    "logged_by_id": event.get("logged_by_id"),
                     "quantity_used": event.get("quantity_used"),
                 }
             )

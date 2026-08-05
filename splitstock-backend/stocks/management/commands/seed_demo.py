@@ -23,15 +23,18 @@ MEMBERS = [
     ("sam", "Sam", "Whitfield", "+919000000004"),
 ]
 
+# target_days spreads the shelf across every state the depletion ring shows —
+# Brick at three days or fewer, Yolk Dim inside the week, Moss beyond it — so
+# the dashboard demonstrates the full range rather than one healthy colour.
 ITEMS = [
-    # name, unit, quantity, cost, buyer index, alert threshold, daily pace
-    ("Cooking Oil", "ml", 2000, "480.00", 0, 3, 55),
-    ("Basmati Rice", "kg", 10, "920.00", 1, 5, 0.22),
-    ("Dish Soap", "ml", 750, "180.00", 2, 3, 14),
-    ("Coffee Beans", "g", 1000, "1150.00", 0, 4, 26),
-    ("Toilet Roll", "rolls", 24, "360.00", 3, 4, 0.7),
-    ("Whole Milk", "L", 6, "330.00", 1, 2, 0.55),
-    ("Laundry Powder", "g", 3000, "540.00", 2, 5, 42),
+    # name, unit, quantity, cost, buyer index, alert threshold, pace, target_days
+    ("Cooking Oil", "ml", 2000, "480.00", 0, 3, 55, 2),
+    ("Whole Milk", "L", 6, "330.00", 1, 2, 0.55, 1),
+    ("Dish Soap", "ml", 750, "180.00", 2, 3, 14, 5),
+    ("Coffee Beans", "g", 1000, "1150.00", 0, 4, 26, 6),
+    ("Toilet Roll", "rolls", 24, "360.00", 3, 4, 0.7, 11),
+    ("Basmati Rice", "kg", 10, "920.00", 1, 5, 0.22, 19),
+    ("Laundry Powder", "g", 3000, "540.00", 2, 5, 42, 26),
 ]
 
 
@@ -83,7 +86,7 @@ class Command(BaseCommand):
         now = timezone.now()
         Stock.objects.filter(household=household).delete()
 
-        for name, unit, quantity, cost, buyer_index, threshold, pace in ITEMS:
+        for name, unit, quantity, cost, buyer_index, threshold, pace, target_days in ITEMS:
             quantity = Decimal(str(quantity))
             stock = Stock.objects.create(
                 household=household,
@@ -118,7 +121,17 @@ class Command(BaseCommand):
             stock.save(update_fields=["current_quantity"])
 
             recalculate_balance_for_stock(stock)
-            apply_prediction(stock)
+
+            # Run the model once to learn the household's pace for this item,
+            # then set what's left to land on the intended runway and re-run.
+            prediction = apply_prediction(stock)
+            if prediction.avg_daily_usage:
+                level = Decimal(str(round(prediction.avg_daily_usage * target_days, 2)))
+                stock.current_quantity = max(
+                    Decimal("0"), min(level, quantity)
+                )
+                stock.save(update_fields=["current_quantity"])
+                apply_prediction(stock)
 
         low = [s.name for s in Stock.objects.filter(household=household) if s.is_low]
 

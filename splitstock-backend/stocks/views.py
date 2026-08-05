@@ -180,11 +180,15 @@ class UsageLogViewSet(viewsets.ModelViewSet):
             recalculate_balance_for_stock(stock)
 
             logged_by = request.user.display_name
+            logged_by_id = request.user.id
             household_id = stock.household_id
             transaction.on_commit(
                 lambda: (
                     broadcast_stock_update(
-                        stock, logged_by=logged_by, quantity_used=quantity_used
+                        stock,
+                        logged_by=logged_by,
+                        logged_by_id=logged_by_id,
+                        quantity_used=quantity_used,
                     ),
                     broadcast_balance_update(household_id),
                 )
