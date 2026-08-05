@@ -1,0 +1,36 @@
+.skills { border-bottom: 2px solid var(--line); }
+.skills-title { margin: 0.4rem 0 3rem; }
+
+.branch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.4rem;
+}
+
+.branch-card.card-spotlight {
+  border: 2px solid var(--line);
+  border-radius: 0;
+  background: var(--panel);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.branch-card.card-spotlight:hover { transform: translateY(-6px); border-color: var(--lime); box-shadow: 8px 8px 0 #000; }
+.branch-card.is-current { border-color: var(--line-strong); }
+.branch-card.is-current.card-spotlight:hover { border-color: var(--accent); box-shadow: 8px 8px 0 var(--accent); }
+
+.branch-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
+.branch-name { font-family: var(--font-mono); font-size: 0.95rem; color: var(--lime); }
+.is-current .branch-name { color: var(--accent); }
+.branch-here { font-family: var(--font-mono); font-size: 0.68rem; color: #000; background: var(--accent); padding: 0.1rem 0.4rem; }
+
+.branch-category { font-family: var(--font-display); text-transform: uppercase; font-size: 1.5rem; line-height: 1; margin-bottom: 1.1rem; }
+
+.branch-icons { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-bottom: 1rem; }
+.branch-icon { font-size: 1.8rem; color: var(--ink); transition: color 0.2s ease, transform 0.2s ease; }
+.branch-icon:hover { color: var(--accent); transform: translateY(-3px); }
+
+.branch-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.branch-chip {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  padding: 0.2rem 0.55rem; border: 1px solid var(--line-strong); color: var(--muted);
+}

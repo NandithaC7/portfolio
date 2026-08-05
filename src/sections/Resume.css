@@ -1,0 +1,19 @@
+.resume { border-bottom: 2px solid var(--line); }
+.resume-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.resume-title { font-size: clamp(2.4rem, 6vw, 5rem); margin-bottom: 1.2rem; }
+.resume-cmd {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 1.6vw, 1rem);
+  color: var(--muted);
+  border-left: 2px solid var(--accent);
+  padding-left: 0.9rem;
+}
+.resume-type { color: var(--lime); }
+.resume-magnet { display: inline-block; }
+.resume-btn { font-family: var(--font-mono); font-weight: 700; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.6rem; }

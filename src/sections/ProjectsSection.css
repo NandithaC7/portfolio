@@ -1,0 +1,55 @@
+.projects { border-bottom: 2px solid var(--line); }
+
+.things-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.86;
+  margin: 0.5rem 0 3.5rem;
+}
+.things-title .line { display: inline-block; }
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.6rem;
+}
+
+/* Override SpotlightCard defaults for brutalist look */
+.proj-card.card-spotlight {
+  border: 2px solid var(--line);
+  border-radius: 0;
+  background: var(--panel);
+  padding: 0;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.proj-card.card-spotlight:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent);
+  box-shadow: 8px 8px 0 #000;
+}
+
+.proj-media { position: relative; height: 180px; overflow: hidden; border-bottom: 2px solid var(--line); }
+.proj-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; filter: saturate(1.1) contrast(1.05); }
+.proj-card.card-spotlight:hover .proj-img { transform: scale(1.1); }
+.proj-status { position: absolute; top: 0.8rem; left: 0.8rem; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); }
+
+.proj-body { padding: 1.4rem; }
+.proj-title { font-family: var(--font-display); font-size: 1.9rem; text-transform: uppercase; letter-spacing: 0.01em; margin-bottom: 0.4rem; }
+.proj-desc { color: var(--muted); line-height: 1.6; font-size: 0.98rem; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0; }
+.proj-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  background: var(--panel-2);
+}
+.proj-actions { display: flex; flex-wrap: wrap; gap: 1rem; padding-top: 0.9rem; border-top: 1px dashed var(--line-strong); }
+.proj-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted);
+  transition: color 0.2s ease; cursor: pointer;
+}
+.proj-link:hover { color: var(--accent); }
