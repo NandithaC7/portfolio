@@ -1,65 +1,133 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './SkillsSection.css';
-import SpotlightCard from '../reactbits/SpotlightCard/SpotlightCard';
-import AnimatedContent from '../reactbits/AnimatedContent/AnimatedContent';
-import { FaReact, FaNodeJs, FaJs, FaHtml5, FaCss3Alt, FaPython, FaGitAlt, FaCuttlefish, FaCode } from 'react-icons/fa';
-import { SiCplusplus, SiMongodb } from 'react-icons/si';
 
-const branches = [
+const branchData = [
   {
-    name: 'main', current: true, category: 'Software Engineering',
-    icons: [{ i: <FaCuttlefish />, l: 'C' }, { i: <SiCplusplus />, l: 'C++' }, { i: <FaGitAlt />, l: 'Git' }],
-    chips: ['DSA', 'Systems'],
+    name: 'frontend',
+    color: '#61dafb',
+    skills: ['react', 'html5', 'css3', 'javascript'],
   },
   {
-    name: 'feat/full-stack', category: 'Full-Stack Development',
-    icons: [{ i: <FaReact />, l: 'React' }, { i: <FaNodeJs />, l: 'Node' }, { i: <FaJs />, l: 'JS' }, { i: <FaHtml5 />, l: 'HTML5' }, { i: <FaCss3Alt />, l: 'CSS3' }, { i: <SiMongodb />, l: 'MongoDB' }],
-    chips: ['Express', 'Postgres'],
+    name: 'backend',
+    color: '#68d391',
+    skills: ['node', 'express', 'spring-boot', 'django'],
   },
   {
-    name: 'feat/ml-dl', category: 'Machine & Deep Learning',
-    icons: [{ i: <FaPython />, l: 'Python' }],
-    chips: ['TensorFlow', 'scikit-learn', 'Pandas'],
+    name: 'machine-learning',
+    color: '#ff3b2e',
+    skills: ['tensorflow', 'scikit-learn', 'pytorch', 'pandas'],
   },
   {
-    name: 'feat/big-data', category: 'Big Data Analytics',
-    icons: [{ i: <FaCode />, l: 'MATLAB' }],
-    chips: ['Pandas', 'Analytics', 'Edge'],
+    name: 'deep-learning',
+    color: '#d7ff3f',
+    skills: ['pytorch', 'tensorflow', 'keras'],
   },
   {
-    name: 'feat/ui-ux', category: 'UI / UX Design',
-    icons: [{ i: <FaCss3Alt />, l: 'CSS3' }],
-    chips: ['Figma', 'Motion', 'Editorial'],
+    name: 'big-data',
+    color: '#f6a623',
+    skills: ['pandas', 'spark', 'hadoop'],
   },
 ];
 
+const standaloneSkills = ['python', 'postgresql', 'mongodb', 'docker', 'git'];
+
 const SkillsSection = () => {
+  const sectionRef = useRef(null);
+  const branchRefs = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('branch-visible');
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+    );
+
+    branchRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="skills" className="sec skills">
       <div className="sec-inner">
-        <p className="kicker"><span className="tok">$</span> git branch --list <span className="cmt"># pick a skill tree</span></p>
-        <h2 className="display skills-title">BRANCHES</h2>
+        {/* Terminal heading */}
+        <p className="kicker">
+          <span className="tok">$</span> git branch <span className="cmt"># skill tree</span>
+        </p>
 
-        <div className="branch-grid">
-          {branches.map((b, i) => (
-            <AnimatedContent key={b.name} distance={60} delay={(i % 3) * 0.06} duration={0.7}>
-              <SpotlightCard className={`branch-card cursor-target ${b.current ? 'is-current' : ''}`} spotlightColor="rgba(215, 255, 63, 0.18)">
-                <div className="branch-top">
-                  <span className="branch-name">{b.current ? '* ' : ''}{b.name}</span>
-                  {b.current && <span className="branch-here">HEAD</span>}
+        <div className="git-branch-viz" ref={sectionRef}>
+          {/* Main trunk line */}
+          <div className="git-trunk">
+            <div className="trunk-line" />
+
+            {branchData.map((branch, bi) => (
+              <div
+                key={branch.name}
+                className="git-branch-row"
+                ref={(el) => (branchRefs.current[bi] = el)}
+                style={{ '--branch-color': branch.color, '--branch-delay': `${bi * 0.15}s` }}
+              >
+                {/* Branch line from trunk */}
+                <div className="branch-connector">
+                  <div className="branch-node-main" />
+                  <div className="branch-line-horiz" />
+                  <div className="branch-label-wrap">
+                    <span className="branch-asterisk">*</span>
+                    <span className="branch-name-text">{branch.name}</span>
+                  </div>
                 </div>
-                <h3 className="branch-category">{b.category}</h3>
-                <div className="branch-icons">
-                  {b.icons.map((ic) => (
-                    <span className="branch-icon" key={ic.l} title={ic.l}>{ic.i}</span>
+
+                {/* Skills as commit nodes on the branch */}
+                <div className="branch-commits">
+                  {branch.skills.map((skill, si) => (
+                    <div
+                      key={skill}
+                      className="commit-node-wrap"
+                      style={{ '--commit-delay': `${bi * 0.15 + si * 0.08}s` }}
+                    >
+                      <div className="commit-node-dot" />
+                      <span className="commit-skill-label">{skill}</span>
+                    </div>
                   ))}
                 </div>
-                <div className="branch-chips">
-                  {b.chips.map((c) => <span className="branch-chip" key={c}>{c}</span>)}
+              </div>
+            ))}
+          </div>
+
+          {/* Standalone tools row */}
+          <div
+            className="git-branch-row git-tools-row"
+            ref={(el) => (branchRefs.current[branchData.length] = el)}
+            style={{ '--branch-color': '#8f8f88', '--branch-delay': `${branchData.length * 0.15}s` }}
+          >
+            <div className="branch-connector">
+              <div className="branch-node-main" />
+              <div className="branch-line-horiz" />
+              <div className="branch-label-wrap">
+                <span className="branch-asterisk">*</span>
+                <span className="branch-name-text">tools</span>
+              </div>
+            </div>
+            <div className="branch-commits">
+              {standaloneSkills.map((skill, si) => (
+                <div
+                  key={skill}
+                  className="commit-node-wrap"
+                  style={{ '--commit-delay': `${branchData.length * 0.15 + si * 0.08}s` }}
+                >
+                  <div className="commit-node-dot" />
+                  <span className="commit-skill-label">{skill}</span>
                 </div>
-              </SpotlightCard>
-            </AnimatedContent>
-          ))}
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

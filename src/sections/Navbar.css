@@ -9,8 +9,13 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.6rem;
-  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0));
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.92), rgba(10, 10, 10, 0));
   backdrop-filter: blur(6px);
+  transition: background 0.3s ease;
+}
+
+[data-theme="light"] .nav {
+  background: linear-gradient(to bottom, rgba(245, 243, 239, 0.95), rgba(245, 243, 239, 0));
 }
 
 .nav-logo {
@@ -26,7 +31,7 @@
 .nav-caret { color: var(--lime); animation: navblink 1s steps(2) infinite; }
 @keyframes navblink { 50% { opacity: 0; } }
 
-/* GooeyNav wrapper: keep it compact and centered in the bar */
+/* GooeyNav wrapper */
 .nav-links { position: relative; }
 .nav-links .gooey-nav-container { --color-1: #ff3b2e; --color-2: #d7ff3f; --color-3: #ffffff; --color-4: #ff8a3d; }
 .nav-links nav ul {
@@ -44,6 +49,33 @@
 }
 .nav-links nav ul li.active { color: #000; }
 .nav-links nav ul li a { display: block; }
+
+/* Right side group */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.08);
+}
 
 .nav-cta-magnet { display: inline-block; }
 .nav-cta { font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; }

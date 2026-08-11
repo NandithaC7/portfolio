@@ -1,0 +1,123 @@
+.education {
+  border-bottom: 2px solid var(--line);
+}
+
+.edu-title {
+  margin-top: 0.5rem;
+  margin-bottom: 3rem;
+  font-size: clamp(2.5rem, 8vw, 7rem);
+}
+.edu-title .accent { color: var(--accent); }
+
+.edu-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 860px;
+}
+
+/* Education card */
+.edu-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 2.2rem;
+  border: 2px solid var(--line);
+  background: var(--panel);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.edu-card:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+/* Logo */
+.edu-card-logo {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--line-strong);
+  background: var(--panel-2);
+  overflow: hidden;
+  padding: 6px;
+}
+.edu-logo-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.edu-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Body */
+.edu-card-body { flex: 1; min-width: 0; }
+
+.edu-period {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.edu-institution {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.edu-degree {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-family: var(--font-sans);
+}
+
+/* Score */
+.edu-card-score {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  text-align: center;
+}
+
+.edu-score-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.edu-score-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--accent);
+  line-height: 1;
+}
+
+@media (max-width: 640px) {
+  .edu-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.4rem;
+  }
+  .edu-card-score {
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 0.6rem;
+    align-items: baseline;
+  }
+}

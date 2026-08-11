@@ -1,36 +1,160 @@
-.skills { border-bottom: 2px solid var(--line); }
-.skills-title { margin: 0.4rem 0 3rem; }
-
-.branch-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.4rem;
+.skills {
+  border-bottom: 2px solid var(--line);
 }
 
-.branch-card.card-spotlight {
-  border: 2px solid var(--line);
-  border-radius: 0;
+.git-branch-viz {
+  position: relative;
+  padding: 1rem 0 2rem;
+}
+
+/* Trunk */
+.git-trunk {
+  position: relative;
+  padding-left: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.trunk-line {
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent) 0%, var(--line-strong) 100%);
+}
+
+/* Each branch row */
+.git-branch-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.4rem 0 1.4rem 0;
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s ease var(--branch-delay), transform 0.5s ease var(--branch-delay);
+}
+.git-branch-row.branch-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Connector from trunk to branch */
+.branch-connector {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+
+.branch-node-main {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--branch-color);
+  flex-shrink: 0;
+  position: relative;
+  left: -0.5rem;
+  box-shadow: 0 0 8px var(--branch-color);
+  transition: box-shadow 0.3s ease;
+}
+.git-branch-row:hover .branch-node-main {
+  box-shadow: 0 0 14px var(--branch-color);
+}
+
+.branch-line-horiz {
+  width: 0;
+  height: 2px;
+  background: var(--branch-color);
+  transition: width 0.6s ease var(--branch-delay);
+  flex-shrink: 0;
+}
+.git-branch-row.branch-visible .branch-line-horiz {
+  width: 2.4rem;
+}
+
+.branch-label-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0;
+  transition: opacity 0.4s ease calc(var(--branch-delay) + 0.2s);
+  white-space: nowrap;
+}
+.git-branch-row.branch-visible .branch-label-wrap {
+  opacity: 1;
+}
+
+.branch-asterisk {
+  color: var(--branch-color);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.branch-name-text {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  color: var(--branch-color);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Commit nodes (skills) on each branch */
+.branch-commits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  padding-left: 3.4rem;
+}
+
+.commit-node-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease var(--commit-delay), transform 0.4s ease var(--commit-delay);
+}
+.git-branch-row.branch-visible .commit-node-wrap {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.commit-node-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--branch-color);
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.commit-skill-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  border: 1px solid var(--line-strong);
+  padding: 0.18rem 0.6rem;
+  border-radius: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
   background: var(--panel);
-  padding: 1.5rem;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.branch-card.card-spotlight:hover { transform: translateY(-6px); border-color: var(--lime); box-shadow: 8px 8px 0 #000; }
-.branch-card.is-current { border-color: var(--line-strong); }
-.branch-card.is-current.card-spotlight:hover { border-color: var(--accent); box-shadow: 8px 8px 0 var(--accent); }
+.commit-node-wrap:hover .commit-skill-label {
+  color: var(--branch-color);
+  border-color: var(--branch-color);
+}
+.commit-node-wrap:hover .commit-node-dot {
+  opacity: 1;
+}
 
-.branch-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
-.branch-name { font-family: var(--font-mono); font-size: 0.95rem; color: var(--lime); }
-.is-current .branch-name { color: var(--accent); }
-.branch-here { font-family: var(--font-mono); font-size: 0.68rem; color: #000; background: var(--accent); padding: 0.1rem 0.4rem; }
+/* Tools row */
+.git-tools-row .branch-name-text { color: var(--muted); }
+.git-tools-row .branch-asterisk { color: var(--muted); }
 
-.branch-category { font-family: var(--font-display); text-transform: uppercase; font-size: 1.5rem; line-height: 1; margin-bottom: 1.1rem; }
-
-.branch-icons { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-bottom: 1rem; }
-.branch-icon { font-size: 1.8rem; color: var(--ink); transition: color 0.2s ease, transform 0.2s ease; }
-.branch-icon:hover { color: var(--accent); transform: translateY(-3px); }
-
-.branch-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.branch-chip {
-  font-family: var(--font-mono); font-size: 0.72rem;
-  padding: 0.2rem 0.55rem; border: 1px solid var(--line-strong); color: var(--muted);
+@media (max-width: 640px) {
+  .branch-commits { padding-left: 2rem; }
+  .git-trunk { padding-left: 1.6rem; }
 }
