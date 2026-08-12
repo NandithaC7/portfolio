@@ -115,14 +115,6 @@ const projects = [
   },
 ];
 
-const statusMap = {
-  testing: { cls: 'wip', label: 'Testing' },
-  completed: { cls: 'done', label: 'Completed' },
-  wip: { cls: 'wip', label: 'In Development' },
-  deploy: { cls: 'deploy', label: 'Deployed' },
-  proto: { cls: 'proto', label: 'Initial Stage' },
-};
-
 const ExpandedSection = ({ title, children }) => {
   if (!children) return null;
   return (
