@@ -19,7 +19,7 @@
 .hero-inner {
   position: relative;
   z-index: 1;
-  max-width: 780px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -113,7 +113,77 @@
 }
 @keyframes heroPulse { 50% { opacity: 0.4; } }
 
+.hero-git-log {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  color: var(--ink);
+  margin-top: 1rem;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+}
+.hero-git-log .prompt { color: var(--lime); }
+
 @media (max-width: 640px) {
   .hero { padding: 7rem 1.1rem 3.5rem; }
   .hero-about { font-size: 0.95rem; }
+  .hero-git-log { font-size: 1.2rem; }
+}
+
+.hero-columns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.hero-left {
+  flex: 1;
+  max-width: 680px;
+  /* Shift slightly to the left if needed, but flex does this naturally */
+}
+
+.hero-right {
+  flex: 0 0 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-pic {
+  width: 100%;
+  border-radius: 12px;
+  background: black;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.hero-pic:hover {
+  transform: scale(1.02);
+}
+
+@keyframes wobbleAnim {
+  0% { transform: translateX(0%); }
+  15% { transform: translateX(-5%) rotate(-5deg); }
+  30% { transform: translateX(4%) rotate(3deg); }
+  45% { transform: translateX(-3%) rotate(-3deg); }
+  60% { transform: translateX(2%) rotate(2deg); }
+  75% { transform: translateX(-1%) rotate(-1deg); }
+  100% { transform: translateX(0%); }
+}
+
+.wobble-anim {
+  animation: wobbleAnim 0.8s ease-in-out;
+}
+
+@media (max-width: 900px) {
+  .hero-columns {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-right {
+    flex: 0 0 auto;
+    width: 280px;
+    margin: 0 auto;
+  }
 }
