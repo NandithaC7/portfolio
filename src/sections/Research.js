@@ -15,7 +15,7 @@ const commits = [
     desc: 'Worked alongside engineering teams to understand enterprise-scale software development by exploring existing products including HRMS and the flagship GeoVex platform. Gained exposure to backend APIs, authentication, database design, workflow automation, and production software architecture. Contributed to the Pole Asset Detection project through dataset annotation and YOLOv8 model fine-tuning, while independently building the iWFM web application to reinforce full-stack development concepts.',
     stack: ['Spring Boot', 'React', 'PostgreSQL', 'Java', 'TypeScript', 'JWT', 'REST API', 'YOLOv8', 'Python', 'Git'],
     certificates: [
-      { label: 'View Offer Letter', link: '/certificates/centillion_offer.pdf' },
+      { label: 'View Intership Offer Letter', link: '/certificates/centillion_offer.pdf' },
       { label: 'View Certificate', link: '/certificates/centillion_certificate.pdf' }
     ]
   },
@@ -91,7 +91,7 @@ const Research = () => {
             const isExpanded = expandedId === c.hash;
             return (
               <AnimatedContent key={c.hash} distance={60} direction="vertical" delay={i * 0.08} duration={0.7}>
-                <article 
+                <article
                   className={`rcommit cursor-target ${isExpanded ? 'expanded' : ''}`}
                   onClick={() => toggleExpand(c.hash)}
                 >
@@ -139,10 +139,10 @@ const Research = () => {
                         {c.certificates && c.certificates.length > 0 && (
                           <div className="rcommit-certs">
                             {c.certificates.map(cert => (
-                              <a 
+                              <a
                                 key={cert.label}
-                                href={cert.link} 
-                                target="_blank" 
+                                href={cert.link}
+                                target="_blank"
                                 rel="noreferrer"
                                 className="cert-btn cursor-target"
                                 onClick={(e) => e.stopPropagation()}
